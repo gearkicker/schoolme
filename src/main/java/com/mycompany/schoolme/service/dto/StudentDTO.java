@@ -4,10 +4,8 @@ import com.mycompany.schoolme.domain.Student;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * <p>
  * A DTO representing a student in a lightweight form usually returned in lists. This DTO is used
  * when sending JSON versions of this object through REST end points.
- * </p>
  */
 @XmlRootElement
 public class StudentDTO {
@@ -18,7 +16,7 @@ public class StudentDTO {
   private Double GPA;
 
   /**
-   * Instantiates a new <code>StudentDTO</code> object
+   * Instantiates a new <tt>StudentDTO</tt> object
    * 
    */
   public StudentDTO() {
@@ -26,9 +24,9 @@ public class StudentDTO {
   }
 
   /**
-   * Instantiates a StudentDTO object from a <code>Student</code> domain object.
+   * Instantiates a StudentDTO object from a <tt>Student</tt> domain object.
    * 
-   * @param student the <code>Student</code> object
+   * @param student the <tt>Student</tt> object
    * @see com.mycompany.schoolme.domain.Student
    */
   public StudentDTO(Student student) {

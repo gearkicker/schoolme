@@ -3,7 +3,7 @@ package com.mycompany.schoolme.service.dto;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * A DTO representing detail about a student class.
+ * A DTO representing detail about a students class.
  */
 @XmlRootElement
 public class StudentClassDTO {
@@ -11,33 +11,43 @@ public class StudentClassDTO {
   private String name;
   private Double grade;
 
+  /**
+   * Initiates an empty StudentClassDTO. One reason this is needed is when creating StudentclassDTO
+   * objects from JSON data.
+   */
   public StudentClassDTO() {}
 
+  /**
+   * Instantiates a StudentClassDTO with data.
+   * 
+   * @param name the name of the student
+   * @param grade the grade of the student
+   */
   public StudentClassDTO(String name, Double grade) {
     this.name = name;
     this.grade = grade;
   }
 
   /**
-   * Get the class name.
+   * Get the students class name.
    * 
-   * @return name of the class
+   * @return name of the students class
    */
   public String getName() {
     return name;
   }
 
   /**
-   * Set the class name.
+   * Set the students class name.
    * 
-   * @param name Class Name
+   * @param name the students class name
    */
   public void setName(String name) {
     this.name = name;
   }
 
   /**
-   * Get the grade of a class
+   * Get the grade of a students class
    * 
    * @return the students grade in the class
    */
@@ -46,9 +56,9 @@ public class StudentClassDTO {
   }
 
   /**
-   * Set the grade for a class.
+   * Set the grade of a students class.
    * 
-   * @param grade grade of the class
+   * @param grade grade of the students class
    */
   public void setGrade(Double grade) {
     this.grade = grade;

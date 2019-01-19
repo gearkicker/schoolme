@@ -16,10 +16,20 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponses;
 import io.swagger.annotations.ApiResponse;
 
+/**
+ * REST end points that handles REST calls relating to a student.
+ */
 @Path("/student")
 @Api(value = "search")
 public class StudentResource {
 
+  /**
+   * A REST end point that gets a student by id
+   * 
+   * @param id the id of a student
+   * @return a students detail in xlm or json format
+   * @throws NotFoundException if there are no students found
+   */
   @GET
   @Path("/{studentId}")
   @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
@@ -27,23 +37,32 @@ public class StudentResource {
     StudentDetailDTO sDTO = new Student().get(id);
     if (null != sDTO) {
       return sDTO;
-    }else {
+    } else {
       throw new NotFoundException(404, "Student not found");
-    } 
-  } 
+    }
+  }
 
+  /**
+   * A REST end point that performs a lookup of a student by first name, last name or both and
+   * returns a list of matching students. The resulting list may contain one or more rows.
+   * 
+   * @param first first name of the student to search by
+   * @param last last name of the student to search by
+   * @return a list of students in xml or json format
+   * @throws NotFoundException if there are no students found
+   */
   @GET
   @Path("search")
   @ApiOperation(value = "Searches for students by their name")
-  @ApiResponses(value = { 
-      @ApiResponse(code = 404, message = "Student not found") })
+  @ApiResponses(value = {@ApiResponse(code = 404, message = "Student not found")})
   @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-  public List<StudentDTO> search(@QueryParam("first") String first, @QueryParam("last") String last) throws NotFoundException {
+  public List<StudentDTO> search(@QueryParam("first") String first, @QueryParam("last") String last)
+      throws NotFoundException {
     List<StudentDTO> students = new Student().search(first, last);
     if (null != students) {
       return students;
-    }else {
+    } else {
       throw new NotFoundException(404, "Student not found");
-    } 
+    }
   }
 }

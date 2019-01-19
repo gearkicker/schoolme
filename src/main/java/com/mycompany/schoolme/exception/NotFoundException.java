@@ -2,9 +2,6 @@ package com.mycompany.schoolme.exception;
 
 /**
  * Exception that indicates data was not found
- * 
- * @author Doug Van Beynen
- *
  */
 public class NotFoundException extends ApiException {
   
@@ -12,7 +9,13 @@ public class NotFoundException extends ApiException {
   
   @SuppressWarnings("unused")
   private int code;
- 
+
+  /**
+   * Instantiates a <tt>NotFoundException</tt> taking an http code and a descriptive message.
+   * 
+   * @param code corresponding http code
+   * @param msg message describing the error
+   */
   public NotFoundException (int code, String msg) {
     super(code, msg);
     this.code = code;

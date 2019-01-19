@@ -2,9 +2,6 @@ package com.mycompany.schoolme.exception;
 
 /**
  * Class that encapsulates all API exceptions
- * 
- * @author Doug Van Beynen
- *
  */
 public class ApiException extends Exception {
  
@@ -14,7 +11,7 @@ public class ApiException extends Exception {
   private int code;
 
   /**
-   * Constructor 
+   * Instantiates an api exception with an http code and a detailed message. 
    * 
    * @param code Exception code - should match HTTP Response Code
    * @param msg message indicating what the exception is

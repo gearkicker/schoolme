@@ -2,9 +2,7 @@ package com.mycompany.schoolme.service.dto;
 
 import com.mycompany.schoolme.cache.ClassCache;
 import com.mycompany.schoolme.domain.ClassDetail;
-import com.mycompany.schoolme.domain.SchoolClass;
 import com.mycompany.schoolme.domain.Student;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.xml.bind.annotation.XmlElement;
@@ -16,88 +14,79 @@ import javax.xml.bind.annotation.XmlRootElement;
  * of a student through an end point.
  */
 @XmlRootElement
-public class StudentDetailDTO {
+public class StudentDetailDTO extends StudentDTO {
 
-  private Integer id;
-  private String first;
-  private String last;
   private String email;
-  private Double GPA;
   private List<StudentClassDTO> studentClasses;
 
   /**
    * Initiates an empty StudentDetailDTO. On reason this is needed is when creating StudentDetailDTO
    * objects from JSON data.
    */
-  public StudentDetailDTO() {}
+  public StudentDetailDTO() {
+    super();
+  }
 
   /**
-   * Instantiates a detailed object of a student from a <code>Student</code> object. This is
+   * Instantiates a detailed object of a student from a <tt>Student</tt> object. This is
    * primarily used when retrieving an object from a data store.
    * 
-   * @param student the <code>Student</code> object
-   * @see om.mycompany.schoolme.domain.Student
+   * @param student the <tt>Student</tt> object
+   * @see com.mycompany.schoolme.domain.Student
    */
   public StudentDetailDTO(Student student) {
-    this.id = student.getId();
-    this.first = student.getFirst();
-    this.last = student.getLast();
+    super(student);
     this.email = student.getEmail();
     setStudentClassesFromClassDetail(student.getStudentClasses());
   }
 
-  public Integer getId() {
-    return id;
-  }
-
-  public void setId(Integer id) {
-    this.id = id;
-  }
-
-  public String getFirst() {
-    return first;
-  }
-
-  public void setFirst(String first) {
-    this.first = first;
-  }
-
-  public String getLast() {
-    return last;
-  }
-
-  public void setLast(String last) {
-    this.last = last;
-  }
-
+  /**
+   * Get the email address of the student
+   * 
+   * @return the students email address
+   */
   public String getEmail() {
     return email;
   }
 
+  /**
+   * Set the email address of the student.
+   * 
+   * @param email the email address of the student.
+   */
   public void setEmail(String email) {
     this.email = email;
   }
 
-  public Double getGPA() {
-    return GPA;
-  }
-
-  public void setGPA(Double gPA) {
-    GPA = gPA;
-  }
-
+  /**
+   * Get the list of student classes.
+   * 
+   * @return the list of student classes
+   * @see com.mycompany.schoolme.service.dto.StudentClassDTO
+   */
   @XmlElementWrapper(name = "studentClasses")
   @XmlElement(name = "studentClassDTO")
   public List<StudentClassDTO> getStudentClasses() {
     return studentClasses;
   }
 
+  /**
+   * Set the list of student classes.
+   * 
+   * @param studentClasses the students classes as a list
+   * @see com.mycompany.schoolme.service.dto.StudentClassDTO
+   */
   public void setStudentClasses(List<StudentClassDTO> studentClasses) {
-    this.GPA =
-        studentClasses.stream().mapToDouble(m -> m.getGrade()).summaryStatistics().getAverage();
+    super.setGPA(
+        studentClasses.stream().mapToDouble(m -> m.getGrade()).summaryStatistics().getAverage());
     this.studentClasses = studentClasses;
   }
 
+  /*
+   * This is an internal helper method that converts a list of <tt>ClassDetail</tt> into a list of
+   * StudentClassDTO and then sets the list in the object.
+   * 
+   */
   private void setStudentClassesFromClassDetail(List<ClassDetail> studentClasses) {
     setStudentClasses(studentClasses.stream()
         .map(
