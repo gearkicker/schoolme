@@ -1,5 +1,11 @@
 package com.mycompany.schoolme.service.dto;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+/**
+ * A DTO representing detail about a student class.
+ */
+@XmlRootElement
 public class StudentClassDTO {
 
   private String name;

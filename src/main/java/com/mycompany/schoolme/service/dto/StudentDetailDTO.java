@@ -7,10 +7,13 @@ import com.mycompany.schoolme.domain.Student;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * A DTO representing a student.
+ * A DTO representing detail about a student. This DTO is used when sending detailed JSON versions
+ * of a student through an end point.
  */
 @XmlRootElement
 public class StudentDetailDTO {
@@ -22,10 +25,19 @@ public class StudentDetailDTO {
   private Double GPA;
   private List<StudentClassDTO> studentClasses;
 
-  public StudentDetailDTO() {
-    // Empty constructor needed for Jackson.
-  }
+  /**
+   * Initiates an empty StudentDetailDTO. On reason this is needed is when creating StudentDetailDTO
+   * objects from JSON data.
+   */
+  public StudentDetailDTO() {}
 
+  /**
+   * Instantiates a detailed object of a student from a <code>Student</code> object. This is
+   * primarily used when retrieving an object from a data store.
+   * 
+   * @param student the <code>Student</code> object
+   * @see om.mycompany.schoolme.domain.Student
+   */
   public StudentDetailDTO(Student student) {
     this.id = student.getId();
     this.first = student.getFirst();
@@ -74,6 +86,8 @@ public class StudentDetailDTO {
     GPA = gPA;
   }
 
+  @XmlElementWrapper(name = "studentClasses")
+  @XmlElement(name = "studentClassDTO")
   public List<StudentClassDTO> getStudentClasses() {
     return studentClasses;
   }
@@ -84,9 +98,7 @@ public class StudentDetailDTO {
     this.studentClasses = studentClasses;
   }
 
-  public void setStudentClassesFromClassDetail(List<ClassDetail> studentClasses) {
-    this.GPA =
-        studentClasses.stream().mapToDouble(m -> m.getGrade()).summaryStatistics().getAverage();
+  private void setStudentClassesFromClassDetail(List<ClassDetail> studentClasses) {
     setStudentClasses(studentClasses.stream()
         .map(
             cd -> new StudentClassDTO(ClassCache.getByClassId(cd.getId()).getName(), cd.getGrade()))

@@ -1,10 +1,7 @@
 package com.mycompany.schoolme;
 
 import org.eclipse.jetty.server.Server;
-import com.mycompany.schoolme.application.SchoolMeApp;
 import com.mycompany.schoolme.cache.Cache;
-import com.mycompany.schoolme.db.SMDerby;
-import io.swagger.jaxrs.config.DefaultJaxrsConfig;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import java.io.IOException;

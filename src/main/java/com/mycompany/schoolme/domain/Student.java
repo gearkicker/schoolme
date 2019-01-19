@@ -78,6 +78,10 @@ public class Student {
   }
 
   public StudentDetailDTO get(Integer id) {
-    return new StudentDetailDTO(StudentCache.get(id));
+    Student s = StudentCache.get(id);
+    if (null != s) {
+      return new StudentDetailDTO(StudentCache.get(id));      
+    }
+    return null;
   }
 }
