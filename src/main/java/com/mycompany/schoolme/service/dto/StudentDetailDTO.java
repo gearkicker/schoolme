@@ -1,5 +1,6 @@
 package com.mycompany.schoolme.service.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mycompany.schoolme.cache.ClassCache;
 import com.mycompany.schoolme.domain.ClassDetail;
 import com.mycompany.schoolme.domain.Student;
@@ -87,6 +88,7 @@ public class StudentDetailDTO extends StudentDTO {
    * StudentClassDTO and then sets the list in the object.
    * 
    */
+  @JsonIgnore
   private void setStudentClassesFromClassDetail(List<ClassDetail> studentClasses) {
     setStudentClasses(studentClasses.stream()
         .map(

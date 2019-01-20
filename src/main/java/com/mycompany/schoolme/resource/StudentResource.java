@@ -11,16 +11,16 @@ import com.mycompany.schoolme.domain.Student;
 import com.mycompany.schoolme.exception.NotFoundException;
 import com.mycompany.schoolme.service.dto.StudentDTO;
 import com.mycompany.schoolme.service.dto.StudentDetailDTO;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponses;
-import io.swagger.annotations.ApiResponse;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 /**
  * REST end points that handles REST calls relating to a student.
  */
 @Path("/student")
-@Api(value = "search")
 public class StudentResource {
 
   /**
@@ -53,8 +53,12 @@ public class StudentResource {
    */
   @GET
   @Path("search")
-  @ApiOperation(value = "Searches for students by their name")
-  @ApiResponses(value = {@ApiResponse(code = 404, message = "Student not found")})
+  @Operation(summary = "Searches for students by their name",
+          responses = {
+                  @ApiResponse(description = "List of students",
+                      content = @Content(mediaType = "application/json",
+                              schema = @Schema(implementation = StudentDTO.class))),
+                  @ApiResponse(responseCode = "404", description = "Student not found")})
   @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
   public List<StudentDTO> search(@QueryParam("first") String first, @QueryParam("last") String last)
       throws NotFoundException {

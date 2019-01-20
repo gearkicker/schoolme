@@ -106,6 +106,6 @@ public class StudentDTO {
    * @param GPA the students GPA for the class
    */
   public void setGPA(Double GPA) {
-    GPA = GPA;
+    this.GPA = GPA;
   }
 }
