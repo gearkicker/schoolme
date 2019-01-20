@@ -6,7 +6,7 @@
 	<artifactId>schoolme</artifactId>
 	<packaging>jar</packaging>
 	<version>1.0</version>
-	<name>restprj</name>
+	<name>schoolme</name>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -64,6 +64,19 @@
 			<artifactId>guava</artifactId>
 			<version>27.0.1-jre</version>
 		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.2.3</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-core</artifactId>
+			<version>1.2.3</version>
+			<scope>compile</scope>
+		</dependency>
+
 	</dependencies>
 	<build>
 		<plugins>
