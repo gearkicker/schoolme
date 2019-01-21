@@ -1,12 +1,24 @@
 package com.mycompany.schoolme.domain;
 
+/**
+ * Holds the information about a class. Contains the class id and the name of the class.
+ */
 public class SchoolClass {
 
   private String id;
   private String name;
 
+  /**
+   * Instantiates a school class. Used when importing and exporting JSON data.
+   */
   public SchoolClass() {}
 
+  /**
+   * Instantiates a school class.
+   * 
+   * @param id the class id
+   * @param name the class name
+   */
   public SchoolClass(String id, String name) {
     this.id = id;
     this.name = name;
@@ -15,7 +27,7 @@ public class SchoolClass {
   /**
    * Get the id of a class
    * 
-   * @return
+   * @return the class id
    */
   public String getId() {
     return id;
