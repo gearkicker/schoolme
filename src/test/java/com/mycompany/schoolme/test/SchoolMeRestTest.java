@@ -63,7 +63,7 @@ public class SchoolMeRestTest extends JerseyTest {
     List<StudentDTO> students = target.path("student/search").queryParam("first", "john")
         .request("application/json").get(new GenericType<List<StudentDTO>>() {});
     assertNotNull(students);
-    assertEquals("Smith",students.get(0).getLast());
+    assertEquals("Smith", students.get(0).getLast());
   }
 
   @Test
@@ -72,7 +72,7 @@ public class SchoolMeRestTest extends JerseyTest {
     List<StudentDTO> students = target.path("student/search").queryParam("last", "smith")
         .request("application/json").get(new GenericType<List<StudentDTO>>() {});
     assertNotNull(students);
-    assertEquals(2,students.size());
+    assertEquals(2, students.size());
   }
 
   @Test
@@ -80,6 +80,13 @@ public class SchoolMeRestTest extends JerseyTest {
     WebTarget target = target();
     Response response = target.path("student/search").queryParam("last", "van beynen")
         .request("application/json").get();
+    assertEquals(Response.Status.NOT_FOUND.getStatusCode(), response.getStatus());
+  }
+
+  @Test
+  public void testStudentSearchNoParams() {
+    WebTarget target = target();
+    Response response = target.path("student/search").request("application/json").get();
     assertEquals(Response.Status.NOT_FOUND.getStatusCode(), response.getStatus());
   }
 

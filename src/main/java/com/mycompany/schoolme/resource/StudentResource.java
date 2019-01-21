@@ -12,6 +12,7 @@ import com.mycompany.schoolme.exception.NotFoundException;
 import com.mycompany.schoolme.service.dto.StudentDTO;
 import com.mycompany.schoolme.service.dto.StudentDetailDTO;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -31,8 +32,17 @@ public class StudentResource {
    */
   @GET
   @Path("/{studentId}")
+  @Operation(summary = "Get a student by id",
+      responses = {
+          @ApiResponse(description = "A single student mathing the id",
+              content = @Content(mediaType = "application/json",
+                  schema = @Schema(implementation = StudentDetailDTO.class))),
+          @ApiResponse(responseCode = "404", description = "Student not found")})
   @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-  public StudentDetailDTO details(@PathParam("studentId") Integer id) throws NotFoundException {
+  public StudentDetailDTO details(
+      @Parameter(description = "The id of a student that needs to be fetched.",
+          required = true) @PathParam("studentId") Integer id)
+      throws NotFoundException {
     StudentDetailDTO sDTO = new Student().get(id);
     if (null != sDTO) {
       return sDTO;
@@ -52,14 +62,16 @@ public class StudentResource {
    */
   @GET
   @Path("search")
-  @Operation(summary = "Searches for students by their name",
-          responses = {
-                  @ApiResponse(description = "List of students",
-                      content = @Content(mediaType = "application/json",
-                              schema = @Schema(implementation = StudentDTO.class))),
-                  @ApiResponse(responseCode = "404", description = "Student not found")})
+  @Operation(summary = "Search for students by their name",
+      responses = {
+          @ApiResponse(description = "List of students",
+              content = @Content(mediaType = "application/json",
+                  schema = @Schema(implementation = StudentDTO.class))),
+          @ApiResponse(responseCode = "404", description = "Student not found")})
   @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-  public List<StudentDTO> search(@QueryParam("first") String first, @QueryParam("last") String last)
+  public List<StudentDTO> search(@Parameter(description = "The first name of the student.",
+      required = false) @QueryParam("first") String first, @Parameter(description = "The last name of the student.",
+      required = false) @QueryParam("last") String last)
       throws NotFoundException {
     List<StudentDTO> students = new Student().search(first, last);
     if (null != students) {
