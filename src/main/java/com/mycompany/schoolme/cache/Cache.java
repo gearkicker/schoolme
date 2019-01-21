@@ -23,7 +23,6 @@ public class Cache {
   /**
    * Initializes the cache.
    * 
-   * @throws IOException an exception if there are issues loading the data
    * @see StudentCache
    * @see ClassCache
    */
