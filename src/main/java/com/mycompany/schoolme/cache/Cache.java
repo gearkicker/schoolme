@@ -7,7 +7,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mycompany.schoolme.application.SchoolMeApp;
 import com.mycompany.schoolme.domain.SchoolDB;
 
 /**
@@ -52,6 +51,4 @@ public class Cache {
     ObjectMapper objectMapper = new ObjectMapper();
     return objectMapper.readValue(jsonData, SchoolDB.class);
   }
-
-
 }

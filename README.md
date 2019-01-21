@@ -22,7 +22,7 @@ This application utlizes the following projects:
 ## Usage
 Clone the code from the link above
 ```
-https://github.com/gearkicker/schoolme.git
+git clone https://github.com/gearkicker/schoolme.git
 ```
 Build the project which also runs the unit tests
 ```
@@ -32,9 +32,9 @@ Run the server
 ```
 java -jar target/schoolme-1.0.jar
 ```
-The server runs in a fat jar so it doesnt't have to be deployed into a servlet container. The server listens on port 8080 upon start up. 
+The server runs embedded in a fat jar so it doesnt't have to be deployed into a servlet container. The server listens on port 8080 upon start up. 
 ## Testing the API
-The data for the API is stored in the  file and is loaded when the server starts up. Navigate to the following endpoints to test them:
+The data for the API is stored in the students_classes.json file and is loaded when the server starts up. Navigate to the following endpoints to test them:
 ```
 http://localhost:8080/api/v1/student/1
 http://localhost:8080/api/v1/student/search?last=smith
@@ -45,9 +45,11 @@ Using curl to hit the endpoints:
 ```
 curl 'http://localhost:8080/api/v1/student/search?last=smith'
 curl 'http://localhost:8080/api/v1/student/1'
-Next results in a NOT FOUND error
+
+Next results in a NOT FOUND error:
 curl 'http://localhost:8080/api/v1/student/d'
-Next returns 404 student not found
+
+Next returns 404 student not found:
 curl 'http://localhost:8080/api/v1/student/33'
 ```
 If wou want to make the JSON more readable use 'jq' https://stedolan.github.io/jq/
@@ -55,10 +57,18 @@ If wou want to make the JSON more readable use 'jq' https://stedolan.github.io/j
 for mac os x.
 sudo brew install jq
 ```
+Using an HTTP header to specify sontent type Accept:application/json
+```
 curl -HAccept:application/json 'http://localhost:8080/api/v1/student/1' | jq 
 curl -HAccept:application/json 'http://localhost:8080/api/v1/student/search?last=smith' | jq
 curl -HAccept:application/json 'http://localhost:8080/api/v1/student/d' | jq
 curl 'http://localhost:8080/api/v1/student/33' | jq
+```
+Let;'s look at the data in XML format.
+```
+curl -HAccept:application/xml 'http://localhost:8080/api/v1/student/1' 
+curl -HAccept:application/xml 'http://localhost:8080/api/v1/student/search?last=smith'
+curl -HAccept:application/xml 'http://localhost:8080/api/v1/student/33'
 ```
 To look at the open api resouce listing navigate to http://localhost:8080/api/v1/openapi.json
 ```
