@@ -17,6 +17,7 @@ This application utlizes the following projects:
 * Jetty 9.4 A javax.servlet container https://www.eclipse.org/jetty/
 * Jersey 2.27 As a JAX-RS complient RESTful Web Services framework. https://jersey.github.io
 * Swagger 2.06 for API documentation supporting Open API 3.02 https://swagger.io
+* JUnit 4.122 Unit testing Framework https://junit.org/junit4/
 * logback 1.2.3  A logging framework https://logback.qos.ch
 
 ## Usage
@@ -52,25 +53,25 @@ curl 'http://localhost:8080/api/v1/student/d'
 Next returns 404 student not found:
 curl 'http://localhost:8080/api/v1/student/33'
 ```
-If wou want to make the JSON more readable use 'jq' https://stedolan.github.io/jq/
+If wou want to make the JSON more readable use `jq` https://stedolan.github.io/jq/
 ```
-for mac os x.
+For Mac OS X.
 sudo brew install jq
 ```
-Using an HTTP header to specify sontent type Accept:application/json
+Using an HTTP header to specify content type Accept:application/json.
 ```
 curl -HAccept:application/json 'http://localhost:8080/api/v1/student/1' | jq 
 curl -HAccept:application/json 'http://localhost:8080/api/v1/student/search?last=smith' | jq
 curl -HAccept:application/json 'http://localhost:8080/api/v1/student/d' | jq
 curl 'http://localhost:8080/api/v1/student/33' | jq
 ```
-Let;'s look at the data in XML format.
+Let's look at the data in XML format.
 ```
 curl -HAccept:application/xml 'http://localhost:8080/api/v1/student/1' 
 curl -HAccept:application/xml 'http://localhost:8080/api/v1/student/search?last=smith'
 curl -HAccept:application/xml 'http://localhost:8080/api/v1/student/33'
 ```
-To look at the open api resouce listing navigate to http://localhost:8080/api/v1/openapi.json
+To look at the open API resouce listing navigate to http://localhost:8080/api/v1/openapi.json
 ```
 json format:
 curl 'http://localhost:8080/api/v1/openapi.json' | jq
