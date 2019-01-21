@@ -1,19 +1,13 @@
 package com.mycompany.schoolme;
 
-import java.io.IOException;
-import java.net.URI;
-import java.util.logging.Level;
-import javax.ws.rs.core.UriBuilder;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
-import org.glassfish.jersey.jetty.JettyHttpContainerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.servlet.ServletContainer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.mycompany.schoolme.application.SchoolMeApp;
-import com.mycompany.schoolme.cache.Cache;
 
 /**
  * Implements a REST api end point that serves student information to clients. Swagger documentation

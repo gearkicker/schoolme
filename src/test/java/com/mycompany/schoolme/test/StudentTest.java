@@ -21,7 +21,15 @@ public class StudentTest {
     Student student = new Student();
     StudentDetailDTO sDTO = student.get(0);
     assertNotNull(sDTO);
-    assertEquals(sDTO.getFirst().toLowerCase(), "John".toLowerCase());
+    assertEquals("John".toLowerCase(), sDTO.getFirst().toLowerCase());
+  }
+
+  @Test
+  public void testStudentGPA() {
+    Student student = new Student();
+    StudentDetailDTO sDTO = student.get(1);
+    assertNotNull(sDTO);
+    assertEquals(new Double(2.75), sDTO.getGPA());
   }
 
   @Test
@@ -36,7 +44,7 @@ public class StudentTest {
     Student student = new Student();
     List<StudentDTO> students = student.search("john", "smith");
     assertNotNull(students);
-    assertEquals(students.get(0).getLast(), "Smith");
+    assertEquals("Smith", students.get(0).getLast());
   }
 
   @Test
@@ -44,7 +52,7 @@ public class StudentTest {
     Student student = new Student();
     List<StudentDTO> students = student.search("john", null);
     assertNotNull(students);
-    assertEquals(students.get(0).getLast(), "Smith");
+    assertEquals("Smith", students.get(0).getLast());
   }
 
   @Test
@@ -52,7 +60,7 @@ public class StudentTest {
     Student student = new Student();
     List<StudentDTO> students = student.search(null, "smith");
     assertNotNull(students);
-    assertEquals(students.size(), 2);
+    assertEquals(2, students.size());
   }
 
   @Test
