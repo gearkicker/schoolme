@@ -35,11 +35,15 @@ java -jar target/schoolme-1.0.jar
 ```
 The server runs embedded in a fat jar so it doesnt't have to be deployed into a servlet container. The server listens on port 8080 upon start up. 
 ## Testing the API
-The data for the API is stored in the students_classes.json file and is loaded when the server starts up. Navigate to the following endpoints to test them:
+The data for the API is stored in the `students_classes.json` file and is loaded when the server starts up. Navigate to the following endpoints to test them:
 ```
 http://localhost:8080/api/v1/student/1
 http://localhost:8080/api/v1/student/search?last=smith
+
+Next results in a 404 NOT FOUND error:
 http://localhost:8080/api/v1/student/
+
+Get the OpenAPI resource listing:
 http://localhost:8080/api/v1/openapi.json
 ```
 Using curl to hit the endpoints:
@@ -71,7 +75,7 @@ curl -HAccept:application/xml 'http://localhost:8080/api/v1/student/1'
 curl -HAccept:application/xml 'http://localhost:8080/api/v1/student/search?last=smith'
 curl -HAccept:application/xml 'http://localhost:8080/api/v1/student/33'
 ```
-To look at the open API resouce listing navigate to http://localhost:8080/api/v1/openapi.json
+To look at the OpenAPI resouce listing navigate to http://localhost:8080/api/v1/openapi.json
 ```
 json format:
 curl 'http://localhost:8080/api/v1/openapi.json' | jq
